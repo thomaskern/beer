@@ -1,0 +1,22 @@
+Package: beer
+Title: Tools to make developing biological models easier
+Version: 0.1
+Author: Thomas Kern
+Maintainer: Thomas Kern <thk.kern@gmail.com>
+Description: Trains various models, picks the best automatically and visualizes
+    the results
+Depends:
+    R (>= 3.0.1),
+    ggplot2,
+    reshape2,
+    lme4,
+    grid,
+    gridExtra,
+    data.table,
+    ggthemes
+License: GPL (>= 2)
+Collate:
+    'plot.r'
+    'anova.r'
+    'beer.r'
+    'models.r'
