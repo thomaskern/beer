@@ -121,12 +121,15 @@ ask.plot = function(...,sort=getSortDefault){
 #' print(g1,g2)
 #' plot(merge(g2,g3,g4))
 plot.models = function(...,sort=getSortDefault,plot.title=NULL,cols=ceiling(length(dots(...))/2)){
-  if(length(dots(...)) == 1)
-    print(create.plots(...,
+  if(length(dots(...)) == 1){
+    ret = create.plots(...,
                        sort=sort,
                        plot.title=ifelse(is.null(plot.title), 
                                          "", 
-                                         paste(" =>",plot.title)))[[1]])
+                                         paste(" =>",plot.title)))[[1]]
+    print(ret)
+    ret
+  }
   else
     multiplot(create.plots(..., sort=sort),
               cols=cols,
