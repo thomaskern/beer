@@ -1,10 +1,7 @@
 #' All distributions available
 distris = c("binomial","gaussian","Gamma","inverse.gaussian","poisson","quasi","quasibinomial","quasipoisson")
-colors = list("8" = economist_pal(),
-              "10" = tableau_color_pal(),
-              "20" = tableau_color_pal("tableau20"))
-
 getSortDefault = "AIC"
+
 shorten.word = function(str,len) substr(str,1,len)
 split.word = function(str,how) unlist(strsplit(str,how,fixed=TRUE))
 shorten.and.concate = function(x,s,len) do.call(paste, c(lapply(x,shorten,len=len),sep=s))

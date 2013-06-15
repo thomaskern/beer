@@ -1,3 +1,7 @@
+colors = list("8" = economist_pal(),
+              "10" = tableau_color_pal(),
+              "20" = tableau_color_pal("tableau20"))
+
 add.title = function(p,title) {
   if(!is.null(title) && nchar(title) > 0)
     p = p + labs(title=title)
