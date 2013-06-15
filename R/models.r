@@ -1,3 +1,18 @@
+best.by = function(x,fn){
+  f = function(x,fn){x[which.max(models(x,fn))]}
+  g = substitute(fn)
+  tryCatch(
+     f(x,fn),
+    error=function(e){print(paste("No order possible, ", g, " not available for the classifier."));NULL}
+    )
+}
+
+best.by.AIC = function(x) best.by(x,AIC)
+
+best.by.BIC = function(x) best.by(x,BIC)
+
+best.by.logLik = function(x) best.by(x,logLik)
+
 make.model = function(result){
   endresult = list(all = result, 
                    best=list("aic"=best.by.AIC(result),
@@ -36,8 +51,7 @@ as.matrix.models = function(x,...){
 
 #' Trains the models
 linear_model = function(f,d,fn,...){
-  model <- fn(f, data = d, ...)
-  model
+  fn(f, data = d, ...)
 }
 
 glm.linear_model = function(f,d,fam,...){

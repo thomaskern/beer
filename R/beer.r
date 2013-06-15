@@ -41,12 +41,32 @@ paste.to = function(...) {
 
 #' @export
 print.models = function(...,sort=getSortDefault){
-  for(i in dots(...)){
-    print(i$all[[1]]$formula)
-    m = as.matrix(i)
-    print(m[order(-(unlist(m[,sort]))),])
+  fn = function(...,sort){
+    for(i in dots(...)){
+      print(i$all[[1]]$formula)
+      m = as.matrix(i)
+      print(m[order(-(unlist(m[,sort]))),])
+    }
   }
+
+  fn2 = function(...){
+    for(i in dots(...)){
+      print(paste("Total of ", length(i$all)," models"))
+      counter = 1
+      for(x in i$all){
+        cat("\n\n")
+        print(paste0("Model #",counter))
+        print(x)
+        counter = counter + 1
+      }
+      print(paste("Total of ", length(i$all)," models"))
+    }
+  }
+
+  tryCatch(fn(...,sort=sort),
+           error=function(e){fn2(...)})
 }
+
 
 output = function(r,plot.title=NULL,sort=getSortDefault){
   cat("Performance Table\n")
@@ -56,14 +76,3 @@ output = function(r,plot.title=NULL,sort=getSortDefault){
   tryCatch((function(){print(anova(r))})(),
            error=function(e){error(e);warning("IMPORTANT: No automatic anova possible. Manual anova required!")})
 }
-
-best.by = function(x,fn){
-  x[which.max(models(x,fn))]
-}
-
-best.by.AIC = function(x) best.by(x,AIC)
-
-best.by.BIC = function(x) best.by(x,BIC)
-
-best.by.logLik = function(x) best.by(x,logLik)
-
